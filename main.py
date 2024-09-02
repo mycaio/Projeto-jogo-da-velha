@@ -26,8 +26,8 @@ TEMPLATE_JOGADA_ATUAL = """
 TEMPLATE_MENU_PRINCIPAL: str = """
 Você pode jogar esse jogo de duas formas:
     
-  1) Multi Jogador
-  2) Jogador Único
+  1) Multi Player
+  2) Single Player
 
 Para sair do jogo digite "sair".
 
@@ -96,7 +96,8 @@ def modo_multi_player():
             if tem_ganhador(jogadas, template_da_matriz):
                 limpa_a_tela()
                 imprime_ganhador(jogador_atual, True)
-                break
+                inicia_jogo()
+                return
 
             if jogador_atual == "❎":
                 jogador_atual = "🟠"
@@ -105,13 +106,13 @@ def modo_multi_player():
 
         if not tem_lugar_livre_para_jogar(template_da_matriz):
             limpa_a_tela()
-            print(f'Shiii, deu velha 😬😄Bora tentar de novo!')
-            break
-
-    print(template_da_matriz)
+            print(f'Shiii, deu velha 😬😄 Bora tentar de novo!\n')
+            inicia_jogo()
+            return
 
 
 def modo_single_player():
+    limpa_a_tela()
     print(TEMPLATE_MENSAGEM_SINGLE_PLAYER)
 
     rodada_atual: int = 1
@@ -130,8 +131,9 @@ def modo_single_player():
             forcar_limpeza_da_tela = False
 
         if not tem_lugar_livre_para_jogar(template_da_matriz):
-            print(f'Shiii, deu velha 😬😄Bora tentar de novo!')
-            break
+            print(f'Shiii, deu velha 😬😄Bora tentar de novo!\n')
+            inicia_jogo()
+            return
 
         opcao_escolhida: str = ''
         eh_maquina = eh_vez_do_computador(jogador_atual)
@@ -164,11 +166,10 @@ def modo_single_player():
             if tem_ganhador(jogadas, template_da_matriz):
                 limpa_a_tela()
                 imprime_ganhador(jogador_atual, False)
-                break
+                inicia_jogo()
+                return
 
             jogador_atual = alterna_jogador(jogador_atual)
-
-    print(template_da_matriz)
 
 def eh_vez_do_computador(jogador_atual:str) -> bool:
     return jogador_atual == "🟠"
@@ -213,15 +214,12 @@ def imprime_rodada_atual(jogador_atual: str, rodada_atual: int):
 
 def imprime_ganhador(vencedor: str, eh_multiplayer: bool):
     if not eh_multiplayer and eh_vez_do_computador(vencedor):
-        print('O que te disse? 😎 Venci a rodada! Tente na próxima!')
+        print('\033[1mO que te disse? 😎 Venci a rodada! Tente na próxima! \033[0m\n')
     else:
-        print(f'🚀Parabéns! A vitória é sua {vencedor} !')
+        print(f'\033[1m🚀Parabéns! A vitória é sua {vencedor} ! \033[0m\n')
 
 def atualiza_template(jogador: str, posicao: int, template: str) -> str:
     posicao_em_emoji = f"{posicao}"
-
-    if jogador == "🟠":
-        posicao_em_emoji += " "
 
     return template.replace(posicao_em_emoji, jogador)
 
