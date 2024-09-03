@@ -69,14 +69,14 @@ def seleciona_modo_de_jogo():
 def limpa_a_tela() -> None:
     os.system('cls' if os.name == 'nt' else 'clear')
 
-def cria_lista_de_jogadas_possiveis() -> list[str]:
+def cria_lista_de_jogadas() -> list[str]:
   return ["" for _ in range(0, 9)]
 
 def modo_multi_player():
     rodada_atual: int = 1
     jogador_atual = "❎"
     template_da_matriz = TEMPLATE_MATRIZ
-    jogadas: list[str] = cria_lista_de_jogadas_possiveis()
+    jogadas: list[str] = cria_lista_de_jogadas()
 
     while True:
         limpa_a_tela()
@@ -119,7 +119,7 @@ def modo_single_player():
     jogador_atual: str = "❎"
     forcar_limpeza_da_tela: bool = False
     template_da_matriz: str = TEMPLATE_MATRIZ
-    jogadas: list[str] = cria_lista_de_jogadas_possiveis()
+    jogadas: list[str] = cria_lista_de_jogadas()
 
     print(template_da_matriz)
 
