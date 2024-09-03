@@ -234,13 +234,14 @@ def tem_lugar_livre_para_jogar(template: str) -> bool:
 
 def tem_ganhador(jogadas: list[str], template_atual: str) -> bool:
     vitorias_possiveis: list[list[int]] = [
-        [0, 1, 2],
-        [3, 4, 5],
-        [6, 7, 8],
-        [1, 4, 7],
-        [2, 5, 8],
-        [0, 4, 8],
-        [2, 4, 6],
+        [0, 1, 2], #linha superior
+        [3, 4, 5], #linha do meio
+        [6, 7, 8], #linha inferior
+        [0, 3, 6], #coluna esquerda
+        [1, 4, 7], #coluna do meio
+        [2, 5, 8], #coluna direita
+        [0, 4, 8], #diagonal esquerda → direita
+        [2, 4, 6], #diagonal direita → esquerda
     ]
 
     existe_ganhador: bool = False
