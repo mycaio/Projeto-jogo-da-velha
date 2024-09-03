@@ -203,7 +203,7 @@ def modo_de_jogo_eh_valido(opcao: str) -> bool:
     return opcao is not None and opcao == "1" or opcao == "2" or opcao.lower() == "sair"
 
 def posicao_escolhida_eh_valida(posicao: str, template: str) -> bool:
-    return posicao != '' and posicao != 'X' and posicao != "🟠" and posicao in template
+    return posicao != '' and posicao != '❎' and posicao != "🟠" and posicao in template
 
 def imprime_rodada_atual(jogador_atual: str, rodada_atual: int):
     print(
